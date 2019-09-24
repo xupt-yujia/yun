@@ -1,48 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>denglu</title>
     <style>
-        body{
-            background-image: url("backg3.jpg");
+        body {
+            background-image: url("img/backg3.jpg");
             background-size: cover;
         }
-        h1{
+
+        input,
+        input:focus {
+            outline: none;
+        }
+
+        h1 {
             color: rgb(248, 200, 97);
             text-align: center;
             margin-top: 100px;
             font-family: KaiTi;
             text-align: center;
         }
-        .deng{
+
+        .deng {
             width: 450px;
-            border:10px black solid;
+            border: 5px black solid;
             border-radius: 4px;
             margin: 50px auto;
-            height: 300px;
+            height: 250px;
             box-shadow: 0 0 50px white;
         }
-        .lu{
+
+        .lu {
             margin-left: 50px;
             width: 400px;
             margin-top: 30px;
         }
-        .lu input{
+
+        .lu input {
             height: 30px;
             width: 80%;
-            font-size:16px;
+            font-size: 16px;
             padding-left: 15px;
             margin-top: 10px;
-      
-            color:rgb(248, 200, 97);
+
+            color: rgb(248, 200, 97);
             border-radius: 8px;
         }
-        .bot{
+
+        .bot {
             margin-left: 50px;
         }
-        .bot input{
+
+        .bot input {
             width: 130px;
             height: 40px;
             text-align: center;
@@ -50,11 +61,13 @@
             margin: 20px;
             border-radius: 20px;
             background-color: rgb(248, 200, 97);
-            border:inset 8px wheat solid;
-        } 
-        .bot input:hover{
+            border: inset 8px wheat solid;
+        }
+
+        .bot input:hover {
             background-color: rgb(47, 255, 255);
         }
+
         /* .bot a{
             width: 130px;
             height: 40px;
@@ -70,24 +83,90 @@
             background-color: rgb(47, 255, 255);
         } */
     </style>
-    </head>
+</head>
+
 <body>
-    <h1>注册界面</h1>
+    <h1>登陆界面</h1>
     <div class="deng">
-        <form action="userregistered.php" method="POST">
-            <div class="lu">
-                <input type="text" name="username" placeholder="用户名">
-                <input type="text" name="nickname" placeholder="昵称">
-                <input type="password" name="password" placeholder="密码">
-                <input type="password" name="enpassword" placeholder="确认密码">
-            </div>
-            <div class="bot">
-                <a href="index5.html"><input type="button" value="返回上一步"> </a>
-               <input type="submit" value="提交">
-                <!-- <a href="大作业.html">返回上一步</a>
-                <a href="zhuye.html">提交</a> -->
-            </div>
-        </form>
+        <div class="lu">
+            <input id="username" type="text" name="username" placeholder="用户名">
+            <input id="password" type="password" name="" placeholder="密码">
+            <input id="forsure" type="password" name="" placeholder="确认密码">
+        </div>
+        <div class="bot">
+            <a href="登录.html"><input type="button" value="返回上一步"> </a>
+            <input id="submit" type="button" value="提交">
+            <!-- <a href="大作业.html">返回上一步</a>
+            <a href="zhuye.html">提交</a> -->
+        </div>
     </div>
+
+    <script>
+
+        var submit = document.getElementById("submit");
+        submit.addEventListener("click", function () {
+            var username = document.getElementById("username");
+            var password = document.getElementById("password");
+            var forsure = document.getElementById("forsure");
+            if (password.value == forsure.value) {
+                username = username.value;
+                password = password.value;
+                var sendData = { username, password};
+                var stringData = JSON.stringify(sendData);
+                function createxhr() {
+                    if (typeof XMLHttpRequest != "undefined") {
+                        return new XMLHttpRequest();
+                    }
+                    else if (typeof ActiveXObject != "undefined") {
+                        return new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    else {
+                        throw new error("error");
+                    }
+                };
+                var xhr = createxhr();
+                xhr.onreadystatechange = function () {
+                    switch (xhr.readyState) {
+                        case 0:
+                            //  alert("请求未初始化");
+                            break;
+                        case 1:
+                            //  alert("请求启动，尚未发送");
+                            break;
+                        case 2:
+                            // alert("请求发送，尚未得到响应");
+                            break;
+                        case 3:
+                            //alert("请求开始响应，收到部分数据");
+                            break;
+                        case 4:
+                            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                                var data = xhr.responseText;
+                                if(data == "success"){
+                                    location.href = "登录.html";
+                                }
+                                else{
+                                    alert("该用户名已存在,请重新输入");
+                                }
+                            } else {
+                                alert("error");
+                            }
+                            break;
+                    }
+
+                };
+                var url = " .php";
+                xhr.open("post", url, true);
+                xhr.send(stringDataData)
+            }
+            else {
+                alert("密码输入不符,请重新输入");
+            };
+
+        }, false);
+
+
+    </script>
 </body>
+
 </html>
