@@ -21,7 +21,7 @@
 		$nickname=ver($nickname);
 		if (empty($username)||empty($password)||empty($nickname)) {
 			$valu="请输入不为空的用户名,昵称和密码";
-			echo json_encode($valu);//返回“请输入不为空的用户名和密码”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“请输入不为空的用户名和密码”
 			//echo $valu."<br>";
 			exit();
 		}
@@ -30,14 +30,14 @@
 		if ((!$bool1)||(!$bool)) {
 			# code...
 			$valu="用户名和密码只能包含字母数字或下划线";
-			echo json_encode($valu);//返回“用户名和密码只能包含字母数字或下划线”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“用户名和密码只能包含字母数字或下划线”
 			//echo $valu;
 			exit();
 		}
 		if (strcmp($password, $enpassword)!=0) {
 			# code...
 			$valu="密码与确认密码不同！";
-			echo json_encode($valu);//返回“密码与确认密码不同！”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“密码与确认密码不同！”
 			//echo $valu;
 			exit();
 		}
@@ -47,7 +47,7 @@
 		if ($num>=1) {
 			# code...
 			$valu="已存在该用户！";
-			echo json_encode($valu);//返回“已存在该用户”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“已存在该用户”
 			//echo $valu;
 			exit();
 		}
@@ -58,12 +58,12 @@
 		if ($result1&&$result) {
 			# code...
 			$valu="注册成功！";
-			echo json_encode($valu);//返回“注册成功”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“注册成功”
 			//echo $valu;
 			exit();
 		}
 		$valu="注册失败！";
-		echo json_encode($valu);//返回“注册失败”
+		echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“注册失败”
 		//echo $valu;
 		exit();
 	}
