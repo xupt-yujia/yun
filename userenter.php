@@ -15,7 +15,7 @@
 		$password=$_POST['userPassword'];
 		if (empty($userName)||empty($password)) {
 			$valu="请输入不为空的用户名和密码";
-			echo json_encode($valu);//返回“请输入不为空的用户名和密码”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“请输入不为空的用户名和密码”
 			//echo $valu;
 			exit();
 		}
@@ -24,7 +24,7 @@
 		if ((!$bool1)||(!$bool)) {
 			# code...
 			$valu="用户名和密码只能包含字母数字或下划线";
-			echo json_encode($valu);//返回“用户名和密码只能包含字母数字或下划线”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“用户名和密码只能包含字母数字或下划线”
 			//echo $valu;
 			exit();
 		}
@@ -37,14 +37,13 @@
 		if ($num==0) {
 			# code...
 			$valu="密码或用户名错误";
-			echo json_encode($valu);//返回“密码或用户名错误”
+			echo json_encode($valu,JSON_UNESCAPED_UNICODE);//返回“密码或用户名错误”
 			//echo $valu;
 			exit();
 		}
 		$_SESSION['username']=$userName;
 		$url="location: seekfile.php?path=../upload/".$userName;
 		header($url);
-
 	}
 	
  ?>
