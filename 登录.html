@@ -3,26 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>注册</title>
+    <title>登录</title>
     <style>
         body {
             /* background: url("image/video2.png") no-repeat;
                 background-size: 100% 100%; 
             background-color: rgb(55, 55, 55);*/
-            background-image: url("img/backg3.jpg");
+            background-image: url("https://github.com/xupt-yujia/yun/blob/master/backg3.jpg");
             background-size: cover;
 
 
+        }
+        input,input:focus{
+            outline: none;
         }
 
         a {
             text-decoration: none;
             color: aliceblue;
-        }
-
-        input,
-        input:focus {
-            outline: none;
         }
 
         h2 {
@@ -73,44 +71,32 @@
         #sub1 {
             width: 100px;
             height: 40px;
-            margin: 15px 70px;
+            margin: 15px 50px;
             background-color: rgb(248, 200, 97);
         }
 
         #sub2 {
             width: 100px;
             height: 40px;
-            margin: 15px 30px;
-            background-color: rgb(248, 200, 97);
-        }
-
-        #sub3 {
-            width: 100px;
-            height: 40px;
             position: absolute;
-            top: 385px;
-            left: 765px;
-            background-color: transparent;
-            border: none;
-            font-size: 16px;
-            color: rgb(255, 251, 249);
+            top: 420px;
+            left: 650px;
+            background-color: rgb(248, 200, 97);
         }
     </style>
 </head>
 
 <body>
-    <!-- <p style="font-size: 24px;"><a href="index.html" style="color:rgb(248, 214, 104)">返回主页</a></p> -->
+    <p style="font-size: 24px;"><a href="index.html" style="color:rgb(248, 214, 104)">返回主页</a></p>
     <h2>登录界面</h2>
     <div class="regist">
         <div class="deng">
-            <input id="username" type="text" name="username" placeholder="用户名">
-            <input id="password" type="password" name="pwd" placeholder="密码"><br>
+            <input type="text" name="username" placeholder="用户名">
+            <input type="password" name="pwd" placeholder="密码"><br>
         </div>
-        <input id="sub1" type="submit" name="sub1" value="用户登录">
-        <input id="sub2" type="submit" name="sub2" value="管理员登录">
-        <a href="注册.html"> <input id="sub3" type="button" name="zhuce" value="快速注册"></a>
+        <input id="sub1" type="submit" name="sub" value="登录">
+        <a href="注册.html"> <input id="sub2" type="button" name="zhuce" value="快速注册"></a>
     </div>
-
 
 
     <script type="text/javascript">
@@ -119,11 +105,10 @@
         sub1.addEventListener("click", function () {
             /*     console.log(username.value);
                 console.log(password.value);*/
-            var username = document.getElementById("username");
-            var password = document.getElementById("password");
-            var user = "user";
-            var data = { username, password, user };
-            var stringData = JSON.stringify(data);
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var data = { username, password};
+            var parseData = JSON.parse(data);
             function createxhr() {
                 if (typeof XMLHttpRequest != "undefined") {
                     return new XMLHttpRequest();
@@ -153,73 +138,24 @@
                     case 4:
                         if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                             var returnData = xhr.responseText;
-                            location.href = "淘宝.html";
+                            var tell = JSON.stringify(returnData);
+                            alert(tell);
                         } else {
-                            alert("请输入正确的用户名和密码");
+                           throw new error("error");
                         }
                         break;
                 }
 
             };
-            var url = " .php";
+            var url = "https://github.com/xupt-yujia/yun/blob/master/userenter.php";
             xhr.open("post", url, true);
-            xhr.send(stringData);
+            xhr.send(parseData);
 
         }, false);
 
-        var sub2 = document.getElementById("sub2");
-        sub2.addEventListener("click", function () {
-            /*     console.log(username.value);
-                console.log(password.value);*/
-            var username = document.getElementById("username");
-            var password = document.getElementById("password");
-            var manager = "manager";
-            var data = { username, password, manager };
-            var stringData = JSON.stringify(data);
-            function createxhr() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    return new XMLHttpRequest();
-                }
-                else if (typeof ActiveXObject != "undefined") {
-                    return new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                else {
-                    throw new error("error");
-                }
-            };
-            var xhr = createxhr();
-            xhr.onreadystatechange = function () {
-                switch (xhr.readyState) {
-                    case 0:
-                        //  alert("请求未初始化");
-                        break;
-                    case 1:
-                        //  alert("请求启动，尚未发送");
-                        break;
-                    case 2:
-                        // alert("请求发送，尚未得到响应");
-                        break;
-                    case 3:
-                        //alert("请求开始响应，收到部分数据");
-                        break;
-                    case 4:
-                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                            var returnData = xhr.responseText;
-                            location.href = "淘宝管理.html";
-                        } else {
-                            alert("请输入正确的用户名和密码");
-                        }
-                        break;
-                }
-
-            };
-            var url = " .php";
-            xhr.open("post", url, true);
-            xhr.send(stringData);
-
-        }, false);
 
     </script>
+
 </body>
 
 </html>
