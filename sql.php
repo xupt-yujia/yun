@@ -31,10 +31,10 @@
 	function update($conn,$table,$sql)
 	{
 		$result=mysqli_query($conn,"UPDATE ".$table." SET ".$sql);
-		if (!$result) {
+		/*if (!$result) {
 			# code...
 			die("修改失败！");
-		}
+		}*/
 		return $result;
 	}
 	/*function buildTable($conn,$sql)
